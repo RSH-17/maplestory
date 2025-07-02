@@ -84,32 +84,174 @@
     B. 효과음
         i. 공격, 점프, 피격 등
 
-Player 플레이어의 조작, 전투, 성장, 상태관리 
+//이동 전용 스크립트
+using UnityEngine;
 
-A. 이동 관련 기능 
-    1. Move 좌우 이동 처리 
-    2. Jump 점프 처리 
-    3. ClimbLadder 사다리 상하 이동 
-    4. TeleportTo 지종 장소로 순간이동 
+public class Movable : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    public float jumpForce = 12f;
 
-B. 전투 관련 기능 
-    1. Attack 기본 공격 실행 
-    2. UseSkill 스킬 시전    
-    3. TakeDamage 데미지 입고 체력 감소 
-    4. Die 체력 0 시 사망 처리 
-    5. Revive 부활 처리 
+    private Rigidbody2D rb;
 
-C. 아이템/ 장비/ 물약 기능 
-    1. Potion 물약 사용 
-    2.    EquipItemp 장비 착용 
-    3. AddItem 아이템 인벤토리에 추가 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-D. 성장 및 스탯 기능 
-    1. GetExperience 경험치 획득 
-    2. LevelUp 레벨업 
-    3. DistributeStat 스탯 및 스킬포인트 분배 
+    public void Move(float direction)
+    {
+        rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
 
-E. 상태 관리 및 인터페이스 연동 
-    1. UpdateUI 체력/ 마나/ 경험치 UI갱신 
-    2. SaveState 현재 상태 저장 요청 
-    3. LoadState 저장된 상태 불러오기 
+        // 방향 전환
+        if (direction != 0)
+            transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
+    }
+
+    public void Jump()
+    {
+        if (IsGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        // 바닥 체크 로직 (레이캐스트 권장)
+        return true;
+    }
+}
+
+//플레이어
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    
+    // 기본 상태 변수
+    
+    public float maxHealth = 100f;
+    public float currentHealth;
+    public float maxMana = 50f;
+    public float currentMana;
+    public int level = 1;
+    public int experience = 0;
+    public int nextLevelExp = 100;
+    public int statPoints = 0;
+    public int skillPoints = 0;
+
+    private bool isDead = false;
+
+    
+    // 컴포넌트 참조
+    
+    private Movable movable;
+    private Animator animator;
+
+    
+    // Unity 기본 함수
+    
+    void Awake()
+    {
+        movable = GetComponent<Movable>();
+        animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+    }
+
+    void Update()
+    {
+        if (isDead) return;
+
+        HandleMovementInput();
+        HandleSkillInput();
+    }
+
+    
+    // 이동 입력 처리
+    
+    void HandleMovementInput()
+    {
+        float inputX = Input.GetAxisRaw("Horizontal");
+        movable.Move(inputX);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            movable.Jump();
+        }
+    }
+
+    
+    //  스킬 / 물약 / 전투
+    
+    void HandleSkillInput()
+    {
+        //예시임 Q스킬로 스킬 사용
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UseSkill(/* skill object or id */);
+        }
+    }
+
+    public void UseSkill(/* Skill skill */)
+    {
+        float manaCost = 20f;
+        if (currentMana >= manaCost)
+        {
+            currentMana -= manaCost;
+            Debug.Log("스킬 사용!");
+        }
+        else
+        {
+            Debug.Log("마나 부족");
+        }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (isDead) return;
+
+        currentHealth -= amount;
+        animator?.SetTrigger("Hit");
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        animator?.SetTrigger("Die");
+        Debug.Log("플레이어 사망");
+    }
+
+    public void Revive()
+    {
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+        isDead = false;
+        Debug.Log("부활!");
+    }
+
+    public void GainExperience(int amount)
+    {
+        experience += amount;
+        if (experience >= nextLevelExp)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        level++;
+        experience = 0;
+        nextLevelExp += 50;
+        statPoints += 3;
+        skillPoints += 3;
+        Debug.Log("레벨업!");
+    }
+}
