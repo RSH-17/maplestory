@@ -83,3 +83,33 @@
     A. 배경음악(지역별 BGM)
     B. 효과음
         i. 공격, 점프, 피격 등
+
+Player 플레이어의 조작, 전투, 성장, 상태관리 
+
+A. 이동 관련 기능 
+    1. Move 좌우 이동 처리 
+    2. Jump 점프 처리 
+    3. ClimbLadder 사다리 상하 이동 
+    4. TeleportTo 지종 장소로 순간이동 
+
+B. 전투 관련 기능 
+    1. Attack 기본 공격 실행 
+    2. UseSkill 스킬 시전    
+    3. TakeDamage 데미지 입고 체력 감소 
+    4. Die 체력 0 시 사망 처리 
+    5. Revive 부활 처리 
+
+C. 아이템/ 장비/ 물약 기능 
+    1. Potion 물약 사용 
+    2.    EquipItemp 장비 착용 
+    3. AddItem 아이템 인벤토리에 추가 
+
+D. 성장 및 스탯 기능 
+    1. GetExperience 경험치 획득 
+    2. LevelUp 레벨업 
+    3. DistributeStat 스탯 및 스킬포인트 분배 
+
+E. 상태 관리 및 인터페이스 연동 
+    1. UpdateUI 체력/ 마나/ 경험치 UI갱신 
+    2. SaveState 현재 상태 저장 요청 
+    3. LoadState 저장된 상태 불러오기 
