@@ -6,6 +6,9 @@ public class testmob : MonoBehaviour
     public string monsterName;
     private float monsterLevel;
     private float currentHealth;
+    private bool isdead = false;
+
+    public MonsterSpawner spawner;
 
 
     void Start()
@@ -13,14 +16,17 @@ public class testmob : MonoBehaviour
         currentHealth = data.maxHealth;
         monsterName = data.monsterName;
         monsterLevel = data.monsterLevel;
-        Debug.Log($"now health:{currentHealth}");
-        Debug.Log($"name:{monsterName}");
-        Debug.Log($"level:{monsterLevel}");
+        Die();
     }
 
-    
-    void Update()
+    void Die()
     {
-        
+        isdead = true;
+        if (spawner != null)
+        {
+            spawner.SpawnAfterDelay(3f);
+            
+        }
+        Destroy(gameObject, 2f);
     }
 }
