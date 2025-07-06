@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem; // Input System용
 
 public class PlayerUI : MonoBehaviour
 {
@@ -15,50 +15,57 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI mpText;
     public TextMeshProUGUI expText;
 
+    [Header("Potion Data")]
+    public PotionData hpPotion;
+    public PotionData mpPotion;
+
     float currentHP;
-    float currentMP;
-    float currentEXP;
     float maxHP = 100f;
-    float maxMP = 100f;
-    float maxEXP = 100f;
+    float currentMP;
+    float maxMP = 60f;
 
     void Start()
     {
         currentHP = 70f;
-        currentMP = 60f;
-        currentEXP = 100f;
-
+        currentMP = 40f;
         UpdateHP(currentHP, maxHP);
         UpdateMP(currentMP, maxMP);
-        UpdateEXP(currentEXP, maxEXP);
+        UpdateEXP(150, 150);
     }
 
     void Update()
     {
-
-        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        // 체력 포션 - H 키
+        if (Keyboard.current.hKey.wasPressedThisFrame)
         {
-            UseHealthPotion();
+            UsePotion(hpPotion);
         }
-        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+
+        // 마나 포션 - M 키
+        if (Keyboard.current.mKey.wasPressedThisFrame)
         {
-            UseManaPotion();
+            UsePotion(mpPotion);
         }
     }
 
-    public void UseHealthPotion()
+    public void UsePotion(PotionData potion)
     {
-        float healAmount = 30f;
-        currentHP = Mathf.Min(currentHP + healAmount, maxHP);
-        UpdateHP(currentHP, maxHP);
-        Debug.Log("체력 포션 사용됨!");
-    }
-    public void UseManaPotion()
-    {
-        float recoverAmount = 20f;
-        currentMP = Mathf.Min(currentMP + recoverAmount, maxMP);
-        UpdateMP(currentMP, maxMP);
-        Debug.Log("마나 포션 사용됨!");
+        if (potion == null) return;
+
+        switch (potion.potionType)
+        {
+            case PotionType.HP:
+                currentHP = Mathf.Min(currentHP + potion.healAmount, maxHP);
+                UpdateHP(currentHP, maxHP);
+                break;
+
+            case PotionType.MP:
+                currentMP = Mathf.Min(currentMP + potion.healAmount, maxMP);
+                UpdateMP(currentMP, maxMP);
+                break;
+        }
+
+        Debug.Log($"{potion.potionName} 사용됨! {potion.healAmount} 회복");
     }
 
     public void UpdateHP(float current, float max)
