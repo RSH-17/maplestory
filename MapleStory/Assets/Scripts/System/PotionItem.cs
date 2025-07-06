@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class potionData
+public class PotionItem
 {
     
 }
