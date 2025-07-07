@@ -8,6 +8,14 @@ public class ItemSlotUI : MonoBehaviour
     public TMP_Text countText;
 
     private ItemData itemData;
+    public void ClearSlot()
+{
+    itemData = null;
+    iconImage.sprite = null;
+    iconImage.enabled = false;
+    countText.text = "";
+}
+
 
     public void SetItem(ItemData newItem)
     {

@@ -22,15 +22,19 @@ public class InventoryManager : MonoBehaviour
 
     void InitSlots(int count)
     {
-        for (int i = 0; i < count; i++)
+        slots.Clear();
+        foreach (Transform child in slotContainer)
         {
-            GameObject go = Instantiate(itemSlotPrefab, slotContainer);
-            var slot = go.GetComponent<ItemSlotUI>();
-            slots.Add(slot);
+            var slot = child.GetComponent<ItemSlotUI>();
+            if (slot != null)
+            {
+                slots.Add(slot);
+                slot.ClearSlot(); // 초기화
+            }
         }
     }
 
-    // 아이템 추가 함수
+    // 아이템 추가 함수 
     public void AddItem(ItemData item)
     {
         // 이미 같은 아이템이 있으면 수량만 증가
