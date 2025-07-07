@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 47
+  controlID: 123
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 575
+    y: 630
     width: 1466
     height: 356
   m_SerializedDataModeController:
@@ -377,7 +377,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Icons
+    - Assets/Fonts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -387,16 +387,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Icons
+  - Assets/Fonts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\\uBC30\uC2B9\uD658\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\maplestory\\MapleStory"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 52}
-    m_SelectedIDs: f4b70000
-    m_LastClickedID: 47092
-    m_ExpandedIDs: 0000000032b5000034b5000036b5000038b500003ab500003cb50000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 76b90000
+    m_LastClickedID: 47478
+    m_ExpandedIDs: 0000000032b5000034b5000036b500003ab500003cb50000a6b50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -504,8 +504,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1468
-    y: 24
+    x: 1467
+    y: 79
     width: 452
     height: 907
   m_SerializedDataModeController:
@@ -526,7 +526,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 241
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 24
+    y: 79
     width: 359
     height: 525
   m_SerializedDataModeController:
@@ -571,9 +571,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 00fbffff14b30000
+      m_SelectedIDs: faf5ffff
+      m_LastClickedID: -2566
+      m_ExpandedIDs: bef6ffff00fbffff14b30000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -619,8 +619,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1
-    y: 24
+    x: 360
+    y: 79
     width: 566
     height: 525
   m_SerializedDataModeController:
@@ -1065,9 +1065,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 744.54944, y: 527.6047, z: -5.176631}
+    m_Target: {x: 706.35187, y: 550.10596, z: -7.1939526}
     speed: 2
-    m_Value: {x: 744.54944, y: 527.6047, z: -5.176631}
+    m_Value: {x: 706.35187, y: 550.10596, z: -7.1939526}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1117,9 +1117,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 527.6625
+    m_Target: 729.3933
     speed: 2
-    m_Value: 527.6625
+    m_Value: 729.3933
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1174,8 +1174,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 569
-    y: 24
+    x: 928
+    y: 79
     width: 537
     height: 525
   m_SerializedDataModeController:
