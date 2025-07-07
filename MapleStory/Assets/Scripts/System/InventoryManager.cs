@@ -61,25 +61,53 @@ public class InventoryManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            ItemData potion = new ItemData
+            var potion = new ItemData
             {
-                itemName = "Red Potion",
-                icon = Resources.Load<Sprite>("Icons/HP_Potion_Icon"),
+                itemName = "HP Potion",
+                icon = Resources.Load<Sprite>("Icons/HP_Potion_Icon"), // Resources/Icons/HP_Potion.png
                 description = "HP를 30 회복합니다.",
                 itemType = ItemData.ItemType.Consumable,
                 recoverHP = 30,
                 recoverMP = 0,
                 amount = 1
             };
-            Debug.Log("스페이스 눌림");
 
-            AddItem(potion);
+            InventoryManager.Instance.AddItem(potion);
         }
-        
-
-    
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            UseFirstPotion(); // 아래에서 정의할 함수
+        }
     }
+    public void UseFirstPotion()
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.IsEmpty()) continue;
+
+            var item = slot.GetItem();
+
+            if (item.itemType == ItemData.ItemType.Consumable)
+            {
+                Debug.Log($"포션 사용: {item.itemName}");
+
+                // HP/MP 회복
+                PlayerStats player = Object.FindFirstObjectByType<PlayerStats>();
+                if (player != null)
+                {
+                    player.UsePotion(item.recoverHP, item.recoverMP);
+                }
+
+                // 수량 감소
+                slot.DecreaseAmount(1);
+                return;
+            }
+        }
+
+        Debug.Log("사용 가능한 포션이 없습니다!");
+    }
+
 
 }

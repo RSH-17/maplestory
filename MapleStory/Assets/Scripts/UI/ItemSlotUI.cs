@@ -9,12 +9,12 @@ public class ItemSlotUI : MonoBehaviour
 
     private ItemData itemData;
     public void ClearSlot()
-{
-    itemData = null;
-    iconImage.sprite = null;
-    iconImage.enabled = false;
-    countText.text = "";
-}
+    {
+        itemData = null;
+        iconImage.sprite = null;
+        iconImage.enabled = false;
+        countText.text = "";
+    }
 
 
     public void SetItem(ItemData newItem)
@@ -40,7 +40,7 @@ public class ItemSlotUI : MonoBehaviour
             // TODO: 회복 처리 등 호출
         }
     }
-        // 이름이 같은 아이템인지 체크
+    // 이름이 같은 아이템인지 체크
     public bool HasItem(string itemName)
     {
         return itemData != null && itemData.itemName == itemName;
@@ -58,5 +58,24 @@ public class ItemSlotUI : MonoBehaviour
     {
         return itemData == null;
     }
+    public ItemData GetItem()
+    {
+        return itemData;
+    }
+
+    public void DecreaseAmount(int value)
+    {
+        itemData.amount -= value;
+
+        if (itemData.amount <= 0)
+        {
+            ClearSlot();
+        }
+        else
+        {
+            countText.text = itemData.amount > 1 ? itemData.amount.ToString() : "";
+        }
+    }
+
 
 }
