@@ -13,17 +13,23 @@ public class ItemData
     public int recoverHP;
     public int recoverMP;
 
-    // 장비일 경우 (예시)
+    // 장비일 경우
     public int attackPower;
     public int defensePower;
-
+    
+    public EquipmentType equipmentType;
     public enum ItemType
     {
         Consumable,
         Equipment,
         Quest
     }
-
+    public enum EquipmentType
+    {
+        Weapon,
+        Armor,
+        Accessory
+    }
     // 수량 증가 메서드
     public void AddAmount(int value)
     {

@@ -61,4 +61,26 @@ public class PlayerStats : MonoBehaviour
         OnLevelUp?.Invoke();
         OnStatsChanged?.Invoke();
     }
+    public int baseAttack = 5;
+    public int baseDefense = 3;
+    private int bonusAttack = 0;
+    private int bonusDefense = 0;
+
+    public int TotalAttack => baseAttack + bonusAttack;
+    public int TotalDefense => baseDefense + bonusDefense;
+
+    public void Equip(ItemData item)
+    {
+        bonusAttack += item.attackPower;
+        bonusDefense += item.defensePower;
+        OnStatsChanged?.Invoke();
+    } 
+
+    public void Unequip(ItemData item)
+    {
+        bonusAttack -= item.attackPower;
+        bonusDefense -= item.defensePower;
+        OnStatsChanged?.Invoke();
+    }
+
 }

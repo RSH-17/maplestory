@@ -66,7 +66,7 @@ public class InventoryManager : MonoBehaviour
             var potion = new ItemData
             {
                 itemName = "HP Potion",
-                icon = Resources.Load<Sprite>("Icons/HP_Potion_Icon"), // Resources/Icons/HP_Potion.png
+                icon = Resources.Load<Sprite>("Icons/HP_Potion_Icon"), 
                 description = "HP를 30 회복합니다.",
                 itemType = ItemData.ItemType.Consumable,
                 recoverHP = 30,
@@ -76,9 +76,25 @@ public class InventoryManager : MonoBehaviour
 
             InventoryManager.Instance.AddItem(potion);
         }
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            ItemData sword = new ItemData
+            {
+                itemName = "Iron Sword",
+                icon = Resources.Load<Sprite>("Icons/sword_icon"),
+                description = "공격력 +5",
+                itemType = ItemData.ItemType.Equipment,
+                equipmentType = ItemData.EquipmentType.Weapon,
+                attackPower = 5,
+                defensePower = 0,
+                amount = 1
+            };
+
+            InventoryManager.Instance.AddItem(sword);
+        }
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            UseFirstPotion(); // 아래에서 정의할 함수
+            UseFirstPotion();
         }
     }
     public void UseFirstPotion()
@@ -104,6 +120,7 @@ public class InventoryManager : MonoBehaviour
                 slot.DecreaseAmount(1);
                 return;
             }
+            
         }
 
         Debug.Log("사용 가능한 포션이 없습니다!");
