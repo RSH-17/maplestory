@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class ItemSlotUI : MonoBehaviour
+public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image iconImage;
     public TMP_Text countText;
 
     private ItemData itemData;
+
     public void ClearSlot()
     {
         itemData = null;
@@ -15,7 +17,6 @@ public class ItemSlotUI : MonoBehaviour
         iconImage.enabled = false;
         countText.text = "";
     }
-
 
     public void SetItem(ItemData newItem)
     {
@@ -40,6 +41,7 @@ public class ItemSlotUI : MonoBehaviour
             // TODO: 회복 처리 등 호출
         }
     }
+
     // 이름이 같은 아이템인지 체크
     public bool HasItem(string itemName)
     {
@@ -58,6 +60,7 @@ public class ItemSlotUI : MonoBehaviour
     {
         return itemData == null;
     }
+
     public ItemData GetItem()
     {
         return itemData;
@@ -77,5 +80,20 @@ public class ItemSlotUI : MonoBehaviour
         }
     }
 
+    // 🟡 툴팁 표시용 함수 추가
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (itemData == null) return;
 
+        TooltipUI tooltip = FindAnyObjectByType<TooltipUI>();
+        if (tooltip != null)
+            tooltip.Show(itemData.itemName, itemData.description);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        TooltipUI tooltip = FindAnyObjectByType<TooltipUI>();
+        if (tooltip != null)
+            tooltip.Hide();
+    }
 }
