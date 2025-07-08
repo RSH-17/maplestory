@@ -39,7 +39,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             
         }
     }
-
+  
     public void OnClick()
     {
         if (itemData == null) return;
