@@ -9,6 +9,7 @@ public class MonsterData : ScriptableObject
     public float maxHealth;
     //이동속도
     public float moveSpeed;
+    public float patrolDistance;
     //공격속도
     public float attackSpeed;
     //경험치

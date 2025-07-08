@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: coco
   maxHealth: 50
-  moveSpeed: 0
+  moveSpeed: 2
+  patrolDistance: 5
   attackSpeed: 0
   expReward: 0
   attackForce: 0
