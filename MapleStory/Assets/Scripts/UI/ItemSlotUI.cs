@@ -25,21 +25,18 @@ public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         iconImage.sprite = itemData.icon;
         iconImage.enabled = true;
 
-        if (itemData.amount > 1)
-            countText.text = itemData.amount.ToString();
-        else
-            countText.text = ""; // 수량 1이면 안 보이게
+        countText.text = itemData.amount > 1 ? itemData.amount.ToString() : "";
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.clickCount == 2) // 더블클릭일 때만
+        if (eventData.clickCount == 2)
         {
-            Debug.Log("더블클릭 감지됨");
+            Debug.Log(" 더블클릭 감지됨");
             OnClick();
-            
         }
     }
-  
+
     public void OnClick()
     {
         if (itemData == null) return;
@@ -47,44 +44,45 @@ public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (itemData.itemType == ItemData.ItemType.Consumable)
         {
             Debug.Log($"{itemData.itemName} 사용됨!");
-            // 포션 사용 처리
+            // 포션 등 소비 아이템 처리 예정
         }
         else if (itemData.itemType == ItemData.ItemType.Equipment)
         {
-            // 장비 장착 처리
-            var equipSlot = EquipmentManager.Instance.GetSlot(itemData.equipmentType);
+            Debug.Log($"장비 아이템 장착 시도: {itemData.itemName}");
 
+            var equipSlot = EquipmentManager.Instance.GetSlot(itemData.equipmentType);
             if (equipSlot != null)
             {
-                // 이미 장착 중인 아이템은 인벤토리로 되돌리기
                 if (!equipSlot.IsEmpty())
                 {
+                    Debug.Log("기존 장비를 인벤토리로 이동");
                     InventoryManager.Instance.AddItem(equipSlot.GetItem());
                 }
 
-                equipSlot.Clear(); // 기존 장비 해제
-                equipSlot.SetItem(itemData); // 새 장비 장착
-                ClearSlot(); // 인벤토리 슬롯 비우기
+                equipSlot.Clear();
+                equipSlot.SetItem(itemData);
+                ClearSlot();
+
+                Debug.Log(" 장비 장착 완료");
+            }
+            else
+            {
+                Debug.LogWarning($" 장비 슬롯을 찾을 수 없습니다: {itemData.equipmentType}");
             }
         }
-
     }
 
-
-    // 이름이 같은 아이템인지 체크
     public bool HasItem(string itemName)
     {
         return itemData != null && itemData.itemName == itemName;
     }
 
-    // 수량 추가
     public void AddAmount(int amount)
     {
         itemData.amount += amount;
         countText.text = itemData.amount > 1 ? itemData.amount.ToString() : "";
     }
 
-    // 비었는지 확인
     public bool IsEmpty()
     {
         return itemData == null;
@@ -108,10 +106,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             countText.text = itemData.amount > 1 ? itemData.amount.ToString() : "";
         }
     }
-    
 
-
-    // 툴팁 표시용 함수 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (itemData == null) return;

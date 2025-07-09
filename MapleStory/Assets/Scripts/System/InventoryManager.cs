@@ -66,7 +66,7 @@ public class InventoryManager : MonoBehaviour
             var potion = new ItemData
             {
                 itemName = "HP Potion",
-                icon = Resources.Load<Sprite>("Icons/HP_Potion_Icon"), 
+                icon = Resources.Load<Sprite>("Icons/HP_Potion_Icon"),
                 description = "HP를 30 회복합니다.",
                 itemType = ItemData.ItemType.Consumable,
                 recoverHP = 30,
@@ -81,7 +81,7 @@ public class InventoryManager : MonoBehaviour
             ItemData sword = new ItemData
             {
                 itemName = "Iron Sword",
-                icon = Resources.Load<Sprite>("Icons/sword_icon"),
+                icon = Resources.Load<Sprite>("Icons/level_60_sword"),
                 description = "공격력 +5",
                 itemType = ItemData.ItemType.Equipment,
                 equipmentType = ItemData.EquipmentType.Weapon,
@@ -95,6 +95,21 @@ public class InventoryManager : MonoBehaviour
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
             UseFirstPotion();
+        }
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            var mpPotion = new ItemData
+            {
+                itemName = "MP Potion",
+                icon = Resources.Load<Sprite>("Icons/MP_Potion_Icon"), // 경로에 아이콘 준비 필요
+                description = "MP를 30 회복합니다.",
+                itemType = ItemData.ItemType.Consumable,
+                recoverHP = 0,
+                recoverMP = 30,
+                amount = 1
+            };
+
+            InventoryManager.Instance.AddItem(mpPotion);
         }
     }
     public void UseFirstPotion()
