@@ -35,20 +35,6 @@ public class PlayerAnimation : MonoBehaviour
 
         // Attack Animation
         anim.SetBool("isAttack", attackModule.isAttack);
-
-        // Skin Parts Modify
-        // PlayerSkinControl.Instance.SkinSetTrigger(GetCurrentAnimationName());
-    }
-
-    // Current Animation name return
-    string GetCurrentAnimationName()
-    {
-        AnimatorClipInfo[] clipInfos = anim.GetCurrentAnimatorClipInfo(0);
-        if (clipInfos.Length > 0)
-        {
-            return clipInfos[0].clip.name;
-        }
-        return "None";
     }
 
     // Player Flip

@@ -3,24 +3,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 3f;
-    public float jumpPower = 10f;
-
     public bool isGrounded { get; private set; }
     public float inputValue { get; private set; }
 
     Rigidbody2D rigid;
     RaycastHit2D rayHit;
 
+    private PlayerData playerData;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        playerData = GetComponent<PlayerData>();
     }
 
     public void handleMovement()
     {
         // Character Move
-        rigid.linearVelocityX = inputValue * speed;
+        rigid.linearVelocityX = inputValue * playerData.speed;
 
         // Landing Platform
         if (rigid.linearVelocityY < 0)
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnJump()
     {
         if (isGrounded)
-            rigid.AddForceY(jumpPower, ForceMode2D.Impulse);
+            rigid.AddForceY(playerData.jumpPower, ForceMode2D.Impulse);
 
         isGrounded = false;
     }

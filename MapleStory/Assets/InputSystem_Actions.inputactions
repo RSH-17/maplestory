@@ -102,6 +102,17 @@
                 },
                 {
                     "name": "",
+                    "id": "437f716f-7054-422d-ac81-cbdbe6b29ab6",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "eb40bb66-4559-4dfa-9a2f-820438abb426",
                     "path": "<Keyboard>/alt",
                     "interactions": "",

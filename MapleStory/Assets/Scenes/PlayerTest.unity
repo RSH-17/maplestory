@@ -636,8 +636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a22032908875f2489f9c9cd528d8b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  jumpPower: 10
 --- !u!114 &552382135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79250bf582e941545866853e232da852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skills: []
 --- !u!114 &552382136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,11 +658,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 552382123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f00585ccd63c434aaa81081b4175274, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fd4097a73a104645be703101231f182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSkins:
-  - {fileID: 1148068610}
+  pName: NONE
+  hp: 100
+  mp: 100
+  attackPoint: 10
+  defencePoint: 10
+  speed: 3
+  jumpPower: 10
 --- !u!1 &1146561911
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +858,6 @@ GameObject:
   - component: {fileID: 1148068607}
   - component: {fileID: 1148068609}
   - component: {fileID: 1148068608}
-  - component: {fileID: 1148068610}
   m_Layer: 6
   m_Name: Weapon_skin
   m_TagString: Player
@@ -954,20 +957,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1148068610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148068606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc5724a8458eb064a9b1b0b7259574c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 552382126}
-  aoc: {fileID: 22100000, guid: 8869573d231abdd4fa1e1aee4925e789, type: 2}
 --- !u!1 &1496626647
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,7 +966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1496626649}
-  - component: {fileID: 1496626648}
+  - component: {fileID: 1496626650}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -985,20 +974,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1496626648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496626647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be126665dbeb5346ab4776fb2177334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponArrays:
-  - AnimClips: []
 --- !u!4 &1496626649
 Transform:
   m_ObjectHideFlags: 0
@@ -1014,6 +989,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1496626650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496626647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991989eaaafbfa0479a82b385814b066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JobSkillArray:
+  - skills:
+    - {fileID: 11400000, guid: 8531a4304a09df24fb0c8c1527d097e7, type: 2}
+  - skills: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
