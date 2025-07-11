@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ public class HealthHandler : MonoBehaviour, IDamageable
     [SerializeField] private MonsterData monsterData;
     private float currentHealth;
     private bool isDead = false;
+
+    public event Action<int> OnDamaged;
+    public event Action OnDie;
 
     private DeathHandler death;
     private DamageTextHandler damageText;
@@ -22,12 +26,12 @@ public class HealthHandler : MonoBehaviour, IDamageable
         if (isDead) return;
 
         currentHealth -= dmg;
-        damageText?.Show(dmg);
+        OnDamaged?.Invoke(dmg);
 
         if (currentHealth <= 0)
         {
             isDead = true;
-            death?.Die();
+            OnDie?.Invoke();
         }
     }
 

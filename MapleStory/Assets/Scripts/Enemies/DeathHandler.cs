@@ -9,12 +9,30 @@ public class DeathHandler : MonoBehaviour
 
     private bool isDead = false;
     private FadeoutHandler fadeoutHandler;
+    private HealthHandler health;
 
     void Awake()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
         fadeoutHandler = GetComponent<FadeoutHandler>();
+    }
+
+    void OnEnable()
+    {
+        health = GetComponent<HealthHandler>();
+        if (health != null)
+        {
+            health.OnDie += Die;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (health != null)
+        {
+            health.OnDie -= Die;
+        }
     }
 
     public void Die()

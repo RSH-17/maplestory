@@ -1,10 +1,29 @@
 using NUnit.Framework;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class DamageTextHandler : MonoBehaviour
 {
     [SerializeField] private GameObject damageTextPrefab;
     [SerializeField] private float verticalOffset = 1f;
+    private HealthHandler health;
+
+    void OnEnable()
+    {
+        health = GetComponent<HealthHandler>();
+        if (health != null)
+        {
+            health.OnDamaged += Show;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (health != null)
+        {
+            health.OnDamaged -= Show;
+        }
+    }
 
     public void Show(int damage)
     {
