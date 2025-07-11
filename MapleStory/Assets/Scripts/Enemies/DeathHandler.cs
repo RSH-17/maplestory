@@ -8,11 +8,13 @@ public class DeathHandler : MonoBehaviour
     [SerializeField] private float destroyDelay = 0.85f;
 
     private bool isDead = false;
+    private FadeoutHandler fadeoutHandler;
 
     void Awake()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
+        fadeoutHandler = GetComponent<FadeoutHandler>();
     }
 
     public void Die()
@@ -29,6 +31,7 @@ public class DeathHandler : MonoBehaviour
 
     private IEnumerator DestroyAfterDelay()
     {
+        fadeoutHandler.StartFadeOut();
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
     }

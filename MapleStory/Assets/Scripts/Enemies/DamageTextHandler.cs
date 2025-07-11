@@ -8,10 +8,16 @@ public class DamageTextHandler : MonoBehaviour
 
     public void Show(int damage)
     {
-        if (damageTextPrefab == null) return;
+        if (damageTextPrefab == null)
+        {
+            return;
+        }
 
         Canvas worldCanvas = CanvasManager.Instance?.worldCanvas;
-        if (worldCanvas == null) return;
+        if (worldCanvas == null)
+        {
+            return;
+        }
 
         GameObject dt = Instantiate(damageTextPrefab, Vector3.zero, Quaternion.identity);
         dt.transform.SetParent(worldCanvas.transform, false);
