@@ -1,0 +1,35 @@
+using NUnit.Framework;
+using UnityEngine;
+
+public class HealthHandler : MonoBehaviour, IDamageable
+{
+    [SerializeField] private MonsterData monsterData;
+    private float currentHealth;
+    private bool isDead = false;
+
+    private DeathHandler death;
+    private DamageTextHandler damageText;
+
+    void Awake()
+    {
+        currentHealth = monsterData.maxHealth;
+        death = GetComponent<DeathHandler>();
+        damageText = GetComponent<DamageTextHandler>();
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        if (isDead) return;
+
+        currentHealth -= dmg;
+        damageText?.Show(dmg);
+
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+            death?.Die();
+        }
+    }
+
+    public bool IsDead() => isDead;
+}
