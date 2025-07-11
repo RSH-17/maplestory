@@ -15,7 +15,7 @@ MonoBehaviour:
   monsterName: coco
   maxHealth: 20
   moveSpeed: 1
-  patrolDistance: 5
+  patrolDistance: 3
   attackSpeed: 0
   expReward: 0
   attackForce: 0
