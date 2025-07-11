@@ -31,7 +31,7 @@ public class DeathHandler : MonoBehaviour
 
     private IEnumerator DestroyAfterDelay()
     {
-        fadeoutHandler.StartFadeOut();
+        fadeoutHandler?.StartFadeOut();
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
     }

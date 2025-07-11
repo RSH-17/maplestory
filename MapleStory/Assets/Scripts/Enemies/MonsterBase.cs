@@ -26,7 +26,7 @@ public class MonsterBase : MonoBehaviour
     IEnumerator Test_Damage(int dmg)
     {
         yield return new WaitForSeconds(3f);
-        healthHandler.TakeDamage(dmg);
+        damageable.TakeDamage(dmg);
     }
 
 
