@@ -7,6 +7,9 @@ public class PlayerStats : MonoBehaviour
     public Stat mp = new Stat(50);
     public Stat exp = new Stat(100);
 
+    public float speed = 3f;
+    public float jumpPower = 10f;
+
     public int level = 1;
 
     public event Action OnStatsChanged;
