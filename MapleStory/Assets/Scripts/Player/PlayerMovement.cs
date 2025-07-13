@@ -9,24 +9,24 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rigid;
     RaycastHit2D rayHit;
 
-    private PlayerData playerData;
+    private PlayerStats playerStats;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        playerData = GetComponent<PlayerData>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     public void handleMovement()
     {
         // Character Move
-        rigid.linearVelocityX = inputValue * playerData.speed;
+        rigid.linearVelocityX = inputValue * playerStats.speed;
 
         // Landing Platform
         if (rigid.linearVelocityY < 0)
         {
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-            rayHit = Physics2D.Raycast(rigid.position, Vector2.down, 1, LayerMask.GetMask("Platform"));
+            rayHit = Physics2D.Raycast(rigid.position, Vector2.down, 1, LayerMask.GetMask("Map Tile"));
 
             if (rayHit.collider != null)
             {
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnJump()
     {
         if (isGrounded)
-            rigid.AddForceY(playerData.jumpPower, ForceMode2D.Impulse);
+            rigid.AddForceY(playerStats.jumpPower, ForceMode2D.Impulse);
 
         isGrounded = false;
     }
