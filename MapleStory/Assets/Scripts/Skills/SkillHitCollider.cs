@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SkillHitCollider : MonoBehaviour
 {
-    public float damage;
+    public int damage;
     public float lifetime = 0.5f;
 
     void Start()
@@ -15,6 +15,7 @@ public class SkillHitCollider : MonoBehaviour
         if(other.CompareTag("Monster"))
         {
             Debug.Log("Monster Attack");
+            other.GetComponent<IDamageable>().TakeDamage(damage);
         }
     }
 }
