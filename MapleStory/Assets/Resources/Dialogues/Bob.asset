@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927f86f31aa152147aebcd61d9c1e79b, type: 3}
   m_Name: Bob
   m_EditorClassIdentifier: 
-  npcName: 
-  sentences: []
+  npcName: bob
+  sentences:
+  - "\uC548\uB155\uD558\uC138\uC694\n\uBC18\uAC11\uC2B5\uB2C8\uB2E4."
