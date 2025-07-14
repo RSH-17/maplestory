@@ -21,13 +21,11 @@ public class ItemData : ScriptableObject
     [Header("사용 이펙트 (옵션)")]
     public GameObject useEffectPrefab;
 
-    /// <summary>
-    /// 다형성을 위해 virtual 메서드 제공
-    /// </summary>
     public virtual void Use()
     {
         Debug.Log($"[ItemData] {itemName} 을(를) 사용했습니다.");
     }
+    
 }
 
 public enum ItemType

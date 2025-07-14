@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class ItemActionHandler
 {
     public void UseItem(ItemData item)
@@ -11,12 +12,14 @@ public class ItemActionHandler
 
     public void EquipItem(EquipmentItemData item)
     {
-        EquipmentSlotUI slot = EquipmentManager.Instance.GetSlot(item.equipmentType);
+        var slot = EquipmentManager.Instance.GetSlot(item.equipmentType);
 
         if (slot != null)
         {
             if (!slot.IsEmpty())
+            {
                 InventoryManager.Instance.AddItem(slot.GetItem());
+            }
 
             slot.SetItem(item);
         }

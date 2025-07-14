@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
+    [Header("UI 요소")]
     public GameObject panel;
     public TMP_Text nameText;
     public TMP_Text dialogueText;
@@ -11,19 +12,32 @@ public class DialogueUI : MonoBehaviour
 
     private string[] sentences;
     private int index = 0;
+    private bool isActive = false;
 
     public void StartDialogue(DialogueData data)
     {
-        Debug.Log($"🗨️ StartDialogue 실행됨: {data.npcName}");
+        if (data == null || data.sentences == null || data.sentences.Length == 0)
+        {
+            Debug.LogWarning("⚠️ 대사 데이터가 비어 있습니다.");
+            return;
+        }
+
+        Debug.Log($"🗨️ 대화 시작: {data.npcName}");
+
         panel.SetActive(true);
+        isActive = true;
+
         nameText.text = data.npcName;
         sentences = data.sentences;
         index = 0;
+
         ShowSentence();
     }
 
     public void ShowSentence()
     {
+        if (!isActive) return;
+
         if (index < sentences.Length)
         {
             dialogueText.text = sentences[index];
@@ -37,14 +51,24 @@ public class DialogueUI : MonoBehaviour
 
     public void EndDialogue()
     {
+        Debug.Log("🛑 대화 종료");
         nameText.text = "";
         dialogueText.text = "";
-        panel.SetActive(false); // 전체 UI 숨김
+        panel.SetActive(false);
+        isActive = false;
     }
 
     void Start()
     {
-        nextButton.onClick.AddListener(ShowSentence);
-        EndDialogue(); // 이건 내부 내용만 숨김
+        if (nextButton != null)
+        {
+            nextButton.onClick.AddListener(ShowSentence);
+        }
+        else
+        {
+            Debug.LogWarning("❌ 다음 버튼이 연결되어 있지 않습니다.");
+        }
+
+        panel.SetActive(false); // 시작 시 UI 비활성화
     }
 }

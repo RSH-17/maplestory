@@ -2,20 +2,30 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    public DialogueData dialogue;
-    public DialogueUI dialogueUI; // 👈 수동 연결용
+    public DialogueData dialogueData;
 
-    void OnMouseDown()
+    DialogueUI dialogueUI;
+
+    void Start()
     {
-        Debug.Log("🖱️ NPC 클릭됨");
-
-        if (dialogueUI != null)
+        dialogueUI = FindAnyObjectByType<DialogueUI>();
+        if (dialogueUI == null)
         {
-            dialogueUI.StartDialogue(dialogue);
-        }
-        else
-        {
-            Debug.LogWarning("❌ dialogueUI가 연결되지 않았습니다!");
+            Debug.LogWarning("❌ DialogueUI를 찾지 못했습니다.");
         }
     }
+
+    void OnMouseDown()
+{
+    Debug.Log("🖱️ NPC 클릭됨!");
+
+    if (dialogueUI != null && dialogueData != null)
+    {
+        dialogueUI.StartDialogue(dialogueData);
+    }
+    else
+    {
+        Debug.LogWarning("❌ dialogueUI 또는 dialogueData가 null입니다!");
+    }
+}
 }
