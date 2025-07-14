@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
 {
-    public ItemData.EquipmentType slotType;
+    public EquipmentType slotType;
     public Image iconImage;
     private ItemData equippedItem;
 
@@ -41,7 +41,7 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
 
     // 클릭 시 해제
     public void OnPointerClick(PointerEventData eventData)
-    {
+    {  
         if (IsEmpty()) return;
 
         Debug.Log($" 장비 해제: {equippedItem.itemName}");

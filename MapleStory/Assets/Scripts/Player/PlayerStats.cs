@@ -71,16 +71,23 @@ public class PlayerStats : MonoBehaviour
 
     public void Equip(ItemData item)
     {
-        bonusAttack += item.attackPower;
-        bonusDefense += item.defensePower;
-        OnStatsChanged?.Invoke();
-    } 
+        if (item is EquipmentItemData equip)
+        {
+            bonusAttack += equip.attackPower;
+            bonusDefense += equip.defensePower;
+            OnStatsChanged?.Invoke();
+        }
+    }
 
     public void Unequip(ItemData item)
     {
-        bonusAttack -= item.attackPower;
-        bonusDefense -= item.defensePower;
-        OnStatsChanged?.Invoke();
+        if (item is EquipmentItemData equip)
+        {
+            bonusAttack -= equip.attackPower;
+            bonusDefense -= equip.defensePower;
+            OnStatsChanged?.Invoke();
+        }
     }
+
 
 }

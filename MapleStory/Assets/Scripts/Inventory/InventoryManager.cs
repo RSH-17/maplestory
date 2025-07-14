@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class InventoryManager : MonoBehaviour
 {
-    public static InventoryManager Instance; // 싱글톤으로 접근
+    public static InventoryManager Instance{ get; private set; } // 싱글톤으로 접근
 
     public Transform slotContainer; // SlotContainer 오브젝트
     public GameObject itemSlotPrefab; // ItemSlot 프리팹
@@ -12,7 +12,14 @@ public class InventoryManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     void Start()
@@ -63,55 +70,44 @@ public class InventoryManager : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            var potion = new ItemData
+            var potion = Resources.Load<ConsumableItemData>("Items/HP_Potion");
+            if (potion != null)
             {
-                itemName = "HP Potion",
-                icon = Resources.Load<Sprite>("Icons/HP_Potion_Icon"),
-                description = "HP를 30 회복합니다.",
-                itemType = ItemData.ItemType.Consumable,
-                recoverHP = 30,
-                recoverMP = 0,
-                amount = 1
-            };
-
-            InventoryManager.Instance.AddItem(potion);
+                InventoryManager.Instance.AddItem(potion);
+            }
         }
+
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            ItemData sword = new ItemData
+            var sword = Resources.Load<EquipmentItemData>("Items/Iron_Sword");
+            if (sword != null)
             {
-                itemName = "Iron Sword",
-                icon = Resources.Load<Sprite>("Icons/level_60_sword"),
-                description = "공격력 +5",
-                itemType = ItemData.ItemType.Equipment,
-                equipmentType = ItemData.EquipmentType.Weapon,
-                attackPower = 5,
-                defensePower = 0,
-                amount = 1
-            };
-
-            InventoryManager.Instance.AddItem(sword);
+                InventoryManager.Instance.AddItem(sword);
+            }
         }
+
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            var mpPotion = Resources.Load<ConsumableItemData>("Items/Mp_Potion");
+            
+            if (mpPotion == null)
+            {
+                Debug.LogError("❌ MP_Potion 로드 실패!");
+            }
+            else
+            {
+                Debug.Log("✅ MP_Potion 로드 성공: " + mpPotion.itemName);
+                InventoryManager.Instance.AddItem(mpPotion);
+            }
+        }
+
+
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
             UseFirstPotion();
         }
-        if (Keyboard.current.digit3Key.wasPressedThisFrame)
-        {
-            var mpPotion = new ItemData
-            {
-                itemName = "MP Potion",
-                icon = Resources.Load<Sprite>("Icons/MP_Potion_Icon"), // 경로에 아이콘 준비 필요
-                description = "MP를 30 회복합니다.",
-                itemType = ItemData.ItemType.Consumable,
-                recoverHP = 0,
-                recoverMP = 30,
-                amount = 1
-            };
-
-            InventoryManager.Instance.AddItem(mpPotion);
-        }
     }
+
     public void UseFirstPotion()
     {
         foreach (var slot in slots)
@@ -120,26 +116,24 @@ public class InventoryManager : MonoBehaviour
 
             var item = slot.GetItem();
 
-            if (item.itemType == ItemData.ItemType.Consumable)
+            if (item is ConsumableItemData consumable)
             {
-                Debug.Log($"포션 사용: {item.itemName}");
+                Debug.Log($"포션 사용: {consumable.itemName}");
 
-                // HP/MP 회복
                 PlayerStats player = Object.FindFirstObjectByType<PlayerStats>();
                 if (player != null)
                 {
-                    player.UsePotion(item.recoverHP, item.recoverMP);
+                    player.UsePotion(consumable.recoverHP, consumable.recoverMP);
                 }
 
-                // 수량 감소
                 slot.DecreaseAmount(1);
                 return;
             }
-            
         }
 
         Debug.Log("사용 가능한 포션이 없습니다!");
     }
+
 
 
 }
