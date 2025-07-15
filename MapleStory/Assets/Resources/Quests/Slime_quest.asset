@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927f86f31aa152147aebcd61d9c1e79b, type: 3}
-  m_Name: Bob
+  m_Script: {fileID: 11500000, guid: 488a69aa13a8e7c40bc3c1b2af54cd70, type: 3}
+  m_Name: Slime_quest
   m_EditorClassIdentifier: 
-  npcName: bob
-  sentences:
-  - "\uC548\uB155\uD558\uC138\uC694\n\uBC18\uAC11\uC2B5\uB2C8\uB2E4."
-  - "\uD018\uC2A4\uD2B8\uD018\uC2A4\uD2B8"
+  questId: quest_slime01
+  title: "\uC2AC\uB77C\uC784 \uD1F4\uCE58"
+  description: "\uC2AC\uB77C\uC784 5\uB9C8\uB9AC\uB97C \uD1F4\uCE58\uD558\uC138\uC694"
+  state: 0
