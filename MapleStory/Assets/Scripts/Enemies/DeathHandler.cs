@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class DeathHandler : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class DeathHandler : MonoBehaviour
 
     private bool isDead = false;
     private FadeoutHandler fadeoutHandler;
-
+    public event Action OnDie;
     void Awake()
     {
         if (animator == null)
@@ -22,6 +23,7 @@ public class DeathHandler : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
+        OnDie?.Invoke();
 
         if (animator != null)
             animator.SetTrigger("Die");
