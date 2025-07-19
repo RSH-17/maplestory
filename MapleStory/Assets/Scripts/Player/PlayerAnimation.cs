@@ -9,7 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     Animator anim;
     SpriteRenderer spriter;
 
-    bool SpriteFlipX;
+    public bool SpriteFlipX;
 
     void Awake()
     {

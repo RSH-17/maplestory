@@ -10,6 +10,7 @@ public class DeathHandler : MonoBehaviour
 
     private bool isDead = false;
     private FadeoutHandler fadeoutHandler;
+
     public event Action OnDie;
     void Awake()
     {

@@ -8,14 +8,13 @@ public class SOSkill : ScriptableObject
     public string description;
 
     public Key key;
-
-    public float baseDamage;
-    public float coefficient;
+    
+    public float baseDamage; // 기본 데미지 (깡딜)
+    public float coefficient; // 스킬 계수
 
     public int useResourse;
-    public int colldown;
+    public int cooldown;
 
-    public string animName;
-    public GameObject BeamPrefab;
+    public GameObject prefab;
     public Sprite icon;
 }
