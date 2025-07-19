@@ -22,14 +22,13 @@ public class PlayerSkillController : MonoBehaviour
          for (int i = 0;  i < skillList.Count; i++)
         {
             skillBindings[skillList[i].key] = i;
-            skillList[i].GetComponent<SkillHitCollider>().damage = (int)skillList[i].baseDamage + (int)(playerStats.TotalAttack * skillList[i].coefficient); // 우선 int로 형 변환
         }
             
 
         isOnCooldown = new bool[skillList.Count];
     }
 
-    public void keyDownCheck(Key key)
+    public void KeyDownCheck(Key key)
     {
         foreach (var kv in skillBindings)
         {
