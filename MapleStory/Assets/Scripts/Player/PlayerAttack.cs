@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
             if (key.wasPressedThisFrame)
             {
                 Debug.Log("Key Pressed : " + key.displayName);
-                playerSkillController.keyDownCheck(key.keyCode);
+                playerSkillController.KeyDownCheck(key.keyCode);
             }
         } 
 

@@ -91,6 +91,9 @@ public class PlayerStats : MonoBehaviour
             OnStatsChanged?.Invoke();
         }
     }
+    
+    public void ApplyBuff(int buffAmount, int duration)
+    {
 
-
+    }
 }
