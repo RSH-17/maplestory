@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    public DialogueData dialogue;
-    public DialogueUI dialogueUI; // 👈 수동 연결용
+    public DialogueData dialogueData;
+    public QuestGiver questGiver;
+
+    private DialogueUI dialogueUI;
+
+    void Start()
+    {
+        dialogueUI = FindAnyObjectByType<DialogueUI>();
+    }
 
     void OnMouseDown()
     {
-        Debug.Log("🖱️ NPC 클릭됨");
-
-        if (dialogueUI != null)
+        if (dialogueUI != null && dialogueData != null)
         {
-            dialogueUI.StartDialogue(dialogue);
-        }
-        else
-        {
-            Debug.LogWarning("❌ dialogueUI가 연결되지 않았습니다!");
+            dialogueUI.StartDialogue(dialogueData, questGiver);
         }
     }
 }
+
