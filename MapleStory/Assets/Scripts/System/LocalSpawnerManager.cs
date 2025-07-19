@@ -7,21 +7,20 @@ public class LocalSpawnerManager : MonoBehaviour
     //역할 : 몬스터 상태관리, 몬스터 스폰
     private bool isDead { get; set; } = true;
     private GameObject currentMonster;
-    public GameObject monster;
 
-    void Start()
+    void OnEnable()
     {
-        StartCoroutine(SpawnDelay());
+        WorldSpawnManager.trySpawn += SpawnRequest;
     }
 
-    IEnumerator SpawnDelay()
+    void OnDisable()
     {
-        yield return new WaitForSeconds(2f);
-        SpawnRequest();
+        WorldSpawnManager.trySpawn -= SpawnRequest;
     }
+
 
     //테스트용으로 함수 매개변수 뺌
-    public void SpawnRequest()
+    public void SpawnRequest(GameObject monster)
     {
         if (isDead)
         {
@@ -31,6 +30,7 @@ public class LocalSpawnerManager : MonoBehaviour
             if (death != null)
                 death.OnDie += MonsterDeathHandler;
         }
+        else return;
     }
 
     void MonsterDeathHandler()
