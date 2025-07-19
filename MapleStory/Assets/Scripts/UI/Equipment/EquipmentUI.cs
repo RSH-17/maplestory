@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EquipmentUI : MonoBehaviour{
+public class EquipmentUIController : MonoBehaviour{
     public GameObject equipmentPanel;
 
     void Update()
