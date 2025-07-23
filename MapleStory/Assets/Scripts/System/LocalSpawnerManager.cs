@@ -26,6 +26,7 @@ public class LocalSpawnerManager : MonoBehaviour
         {
             currentMonster = Instantiate(monster, transform.position, quaternion.identity);
             DeathHandler death = currentMonster.GetComponent<DeathHandler>();
+            isDead = false;
 
             if (death != null)
                 death.OnDie += MonsterDeathHandler;

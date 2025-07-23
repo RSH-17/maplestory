@@ -10,6 +10,7 @@ public class DeathHandler : MonoBehaviour
 
     private bool isDead = false;
     private FadeoutHandler fadeoutHandler;
+    private HealthHandler healthHandler;
 
     public event Action OnDie;
     void Awake()
@@ -17,6 +18,8 @@ public class DeathHandler : MonoBehaviour
         if (animator == null)
             animator = GetComponent<Animator>();
         fadeoutHandler = GetComponent<FadeoutHandler>();
+        healthHandler = GetComponent<HealthHandler>();
+        healthHandler.CallDeathHandler += Die;
     }
 
     public void Die()
@@ -25,6 +28,7 @@ public class DeathHandler : MonoBehaviour
 
         isDead = true;
         OnDie?.Invoke();
+        healthHandler.CallDeathHandler -= Die;
 
         if (animator != null)
             animator.SetTrigger("Die");
