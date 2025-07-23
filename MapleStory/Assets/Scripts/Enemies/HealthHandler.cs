@@ -9,7 +9,7 @@ public class HealthHandler : MonoBehaviour, IDamageable
     private bool isDead = false;
 
     public event Action<int> OnDamaged;
-    public event Action OnDie;
+    public event Action CallDeathHandler;
 
     private DeathHandler death;
     private DamageTextHandler damageText;
@@ -31,7 +31,7 @@ public class HealthHandler : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             isDead = true;
-            OnDie?.Invoke();
+            CallDeathHandler?.Invoke();
         }
     }
 
