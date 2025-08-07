@@ -1,10 +1,19 @@
+using System;
 using UnityEngine;
 
 public class DropItem : MonoBehaviour, ICollectable
 {
+    [SerializeField] private ScriptableObject effectSO;
+    ICollectEffect effect;
+
+    void Awake()
+    {
+        effect = effectSO as ICollectEffect;
+    }
+
     public void OnCatch(GameObject collector)
     {
-        collector.GetComponent<ICollector>()?.Apply(this);
+        effect?.Apply(collector, this);
         Destroy(gameObject);
     }
 
