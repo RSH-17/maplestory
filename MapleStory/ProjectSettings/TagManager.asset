@@ -17,7 +17,7 @@ TagManager:
   - Monster
   - Player
   - system
-  - 
+  - Drop Item
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Map Tile
     uniqueID: 975608449
+    locked: 0
+  - name: Drop Item
+    uniqueID: 2502711859
     locked: 0
   - name: Monster
     uniqueID: 3261583121
