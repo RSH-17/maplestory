@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2567571404430434806}
   - component: {fileID: 6396876856355555137}
   - component: {fileID: 8878160986519062433}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Weapon_skin
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 3065427002900166856}
   - component: {fileID: 3563072529353022101}
   - component: {fileID: 2004759134816450821}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -194,8 +194,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -435116803
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7859453007497793452, guid: f5f30e31e7bf46f48b09a175b7c5c713, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
