@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class DeathHandler : MonoBehaviour
 {
@@ -9,30 +10,16 @@ public class DeathHandler : MonoBehaviour
 
     private bool isDead = false;
     private FadeoutHandler fadeoutHandler;
-    private HealthHandler health;
+    private HealthHandler healthHandler;
 
+    public event Action OnDie;
     void Awake()
     {
         if (animator == null)
             animator = GetComponent<Animator>();
         fadeoutHandler = GetComponent<FadeoutHandler>();
-    }
-
-    void OnEnable()
-    {
-        health = GetComponent<HealthHandler>();
-        if (health != null)
-        {
-            health.OnDie += Die;
-        }
-    }
-
-    void OnDisable()
-    {
-        if (health != null)
-        {
-            health.OnDie -= Die;
-        }
+        healthHandler = GetComponent<HealthHandler>();
+        healthHandler.CallDeathHandler += Die;
     }
 
     public void Die()
@@ -40,6 +27,8 @@ public class DeathHandler : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
+        OnDie?.Invoke();
+        healthHandler.CallDeathHandler -= Die;
 
         if (animator != null)
             animator.SetTrigger("Die");
